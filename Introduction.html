@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>王超伟 - 简历</title>
+  <title>王超伟 高级Web前端工程师\开发经理 - 简历</title>
   <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
   <style>
     :root {
@@ -98,13 +98,14 @@
 
     h3 {
       margin-top: 16px;
-      font-size: 1rem;
+      font-size: 1.08rem;
     }
 
     h4 {
       margin-top: 12px;
       color: hsl(var(--foreground));
       font-size: 0.95rem;
+      font-weight: 600;
     }
 
     p {
@@ -257,12 +258,13 @@
 
       h3 {
         margin-top: 10pt;
-        font-size: 11.2pt;
+        font-size: 12pt;
       }
 
       h4 {
         margin-top: 8pt;
         font-size: 10.5pt;
+        font-weight: 600;
       }
 
       p,
@@ -290,7 +292,7 @@
   </main>
 
   <script>
-    const markdownPath = "./简历.md";
+    const markdownPath = "./Introduction.md";
     const target = document.getElementById("resume");
 
     function escapeHtml(value) {
@@ -382,7 +384,7 @@
       } catch (error) {
         target.innerHTML = [
           "<h1>简历加载失败</h1>",
-          "<p>请确认已通过本地 HTTP 服务打开本页面，并且 <strong>简历.md</strong> 与 <strong>简历.html</strong> 位于同一目录。</p>",
+          "<p>请确认已通过本地 HTTP 服务打开本页面，并且 <strong>Introduction.md</strong> 与 <strong>简历.html</strong> 位于同一目录。</p>",
           `<p>当前读取路径：<strong>${escapeHtml(markdownPath)}</strong></p>`,
           `<p>错误信息：${escapeHtml(error.message)}</p>`
         ].join("");
