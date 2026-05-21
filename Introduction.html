@@ -37,10 +37,95 @@
         linear-gradient(180deg, hsl(var(--muted)) 0%, hsl(var(--background)) 280px);
     }
 
+    .document-shell {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 190mm);
+      gap: 22px;
+      align-items: start;
+      width: min(100%, calc(190mm + 242px));
+      margin: 0 auto;
+    }
+
+    .toc {
+      position: sticky;
+      top: 24px;
+      max-height: calc(100vh - 48px);
+      overflow: auto;
+      padding: 16px 14px;
+      border: 1px solid rgb(255 255 255 / 0.6);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgb(255 255 255 / 0.78), rgb(255 255 255 / 0.42)),
+        rgb(255 255 255 / 0.58);
+      box-shadow:
+        0 22px 56px rgb(15 23 42 / 0.16),
+        inset 0 1px 0 rgb(255 255 255 / 0.82),
+        inset 0 -1px 0 rgb(148 163 184 / 0.16);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+    }
+
+    .toc-toggle {
+      display: none;
+    }
+
+    .toc-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: hsl(var(--primary));
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .toc-title::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: hsl(var(--primary));
+      box-shadow: 0 0 0 5px rgb(15 23 42 / 0.08);
+    }
+
+    .toc-list {
+      display: grid;
+      gap: 4px;
+      margin: 0;
+    }
+
+    .toc-link {
+      display: block;
+      border-radius: 6px;
+      padding: 7px 9px;
+      color: hsl(var(--muted-foreground));
+      font-size: 0.86rem;
+      line-height: 1.35;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition:
+        color 160ms ease,
+        background-color 160ms ease,
+        transform 160ms ease;
+    }
+
+    .toc-link:hover {
+      color: hsl(var(--primary));
+      background: rgb(255 255 255 / 0.66);
+      text-decoration: none;
+      transform: translateX(2px);
+    }
+
+    .toc-link-level-3 {
+      margin-left: 10px;
+      font-size: 0.8rem;
+    }
+
     .page {
       width: min(100%, 190mm);
       min-height: 277mm;
-      margin: 0 auto;
+      margin: 0;
       padding: 16mm 16mm 18mm;
       background: hsl(var(--background));
       border: 1px solid hsl(var(--border));
@@ -196,6 +281,110 @@
       page-break-inside: avoid;
     }
 
+    @media screen and (max-width: 1040px) {
+      body {
+        padding: 16px 12px;
+      }
+
+      .document-shell {
+        display: block;
+        width: min(100%, 190mm);
+      }
+
+      .toc {
+        position: fixed;
+        top: 78px;
+        left: 12px;
+        z-index: 20;
+        width: min(280px, calc(100vw - 72px));
+        max-height: calc(100dvh - 102px);
+        margin-bottom: 0;
+        transform: translateX(calc(-100% - 12px));
+        transition:
+          transform 220ms ease,
+          box-shadow 220ms ease;
+        overflow: visible;
+      }
+
+      body.toc-open .toc {
+        transform: translateX(0);
+      }
+
+      .toc::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        background:
+          radial-gradient(circle at 20% 0%, rgb(255 255 255 / 0.7), transparent 34%),
+          linear-gradient(160deg, rgb(255 255 255 / 0.34), rgb(148 163 184 / 0.12));
+      }
+
+      .toc-toggle {
+        position: absolute;
+        top: 14px;
+        right: -48px;
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgb(255 255 255 / 0.64);
+        border-radius: 8px;
+        color: hsl(var(--primary));
+        background:
+          linear-gradient(135deg, rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.52)),
+          rgb(255 255 255 / 0.62);
+        box-shadow:
+          0 14px 32px rgb(15 23 42 / 0.18),
+          inset 0 1px 0 rgb(255 255 255 / 0.86);
+        backdrop-filter: blur(18px) saturate(180%);
+        -webkit-backdrop-filter: blur(18px) saturate(180%);
+        cursor: pointer;
+      }
+
+      .toc-toggle::before,
+      .toc-toggle::after {
+        content: "";
+        grid-area: 1 / 1;
+        width: 14px;
+        height: 2px;
+        border-radius: 999px;
+        background: currentColor;
+        transition: transform 180ms ease;
+      }
+
+      .toc-toggle::before {
+        transform: translateY(-4px);
+      }
+
+      .toc-toggle::after {
+        transform: translateY(4px);
+      }
+
+      body.toc-open .toc-toggle::before {
+        transform: rotate(45deg);
+      }
+
+      body.toc-open .toc-toggle::after {
+        transform: rotate(-45deg);
+      }
+
+      .toc-list {
+        max-height: calc(100dvh - 164px);
+        overflow: auto;
+        scrollbar-width: thin;
+      }
+
+      .toc-link-level-3 {
+        margin-left: 8px;
+      }
+
+      .page {
+        margin: 0 auto;
+      }
+    }
+
     @media screen and (max-width: 720px) {
       html {
         font-size: 14px;
@@ -203,6 +392,35 @@
 
       body {
         padding: 0;
+      }
+
+      .document-shell {
+        width: 100%;
+      }
+
+      .toc {
+        top: 72px;
+        left: 10px;
+        width: min(276px, calc(100vw - 66px));
+        max-height: calc(100dvh - 92px);
+        padding: 14px 12px;
+        border-radius: 8px;
+      }
+
+      .toc-toggle {
+        right: -46px;
+        width: 38px;
+        height: 38px;
+      }
+
+      .toc-title {
+        margin-bottom: 10px;
+        font-size: 0.86rem;
+      }
+
+      .toc-link {
+        padding: 7px 8px;
+        font-size: 0.82rem;
       }
 
       .page {
@@ -234,6 +452,15 @@
 
       body {
         padding: 0;
+      }
+
+      .document-shell {
+        display: block;
+        width: auto;
+      }
+
+      .toc {
+        display: none;
       }
 
       .page {
@@ -287,13 +514,24 @@
   </style>
 </head>
 <body>
-  <main class="page">
-    <article id="resume" class="resume" aria-live="polite">正在加载简历...</article>
-  </main>
+  <div class="document-shell">
+    <nav id="toc" class="toc" aria-label="简历目录" hidden>
+      <button id="tocToggle" class="toc-toggle" type="button" aria-label="展开目录" aria-expanded="false"></button>
+      <div class="toc-title">目录</div>
+      <div id="tocList" class="toc-list"></div>
+    </nav>
+
+    <main class="page">
+      <article id="resume" class="resume" aria-live="polite">正在加载简历...</article>
+    </main>
+  </div>
 
   <script>
     const markdownPath = "./Introduction.md";
     const target = document.getElementById("resume");
+    const toc = document.getElementById("toc");
+    const tocList = document.getElementById("tocList");
+    const tocToggle = document.getElementById("tocToggle");
 
     function escapeHtml(value) {
       return value
@@ -370,7 +608,52 @@
       } else {
         target.innerHTML = fallbackMarkdown(source);
       }
+
+      buildToc();
     }
+
+    function slugify(value, index) {
+      return `section-${index}-${value
+        .trim()
+        .toLowerCase()
+        .replace(/[^\w\u4e00-\u9fa5]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "item"}`;
+    }
+
+    function buildToc() {
+      const headings = [...target.querySelectorAll("h2, h3")];
+
+      tocList.innerHTML = "";
+      toc.hidden = headings.length === 0;
+
+      headings.forEach((heading, index) => {
+        if (!heading.id) {
+          heading.id = slugify(heading.textContent || "", index + 1);
+        }
+
+        const link = document.createElement("a");
+        link.className = `toc-link toc-link-level-${heading.tagName.slice(1)}`;
+        link.href = `#${heading.id}`;
+        link.textContent = heading.textContent || "";
+        tocList.appendChild(link);
+      });
+    }
+
+    function setTocOpen(open) {
+      document.body.classList.toggle("toc-open", open);
+      tocToggle.setAttribute("aria-expanded", String(open));
+      tocToggle.setAttribute("aria-label", open ? "收起目录" : "展开目录");
+    }
+
+    tocToggle.addEventListener("click", () => {
+      setTocOpen(!document.body.classList.contains("toc-open"));
+    });
+
+    tocList.addEventListener("click", (event) => {
+      if (event.target.closest(".toc-link") && window.matchMedia("(max-width: 1040px)").matches) {
+        setTocOpen(false);
+      }
+    });
 
     async function loadResume() {
       try {
