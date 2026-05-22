@@ -62,3 +62,8 @@ new_work/
     ├── cn/
     ├── en/
     └── tailored/                 # 针对JD定制版本
+
+## 当前简历版本
+
+- 原始成稿：`Introduction.md`，预览：`Introduction.html`
+- 高级前端工程师版：`versions/tailored/senior-frontend-engineer.md`，预览：`Introduction.html?s=senior-fe`
