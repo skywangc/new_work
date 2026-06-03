@@ -7,6 +7,10 @@ new_work/
 ├── resumes/                          # 成品 Markdown 简历
 │   ├── Introduction.md               # 当前主简历版本
 │   └── senior-frontend-engineer.md   # 高级前端工程师定制版本
+├── demo/                             # 面试项目 Demo
+│   └── flighthub-lite/               # 无人机三维态势可视化原型
+├── wiki/                             # 面试准备与知识沉淀
+│   └── dj.md
 ├── profile/                          # 简历素材与经历草稿
 │   ├── base.md                       # 早期工作经历与技能素材
 │   ├── project_experience.md         # 项目经历素材
@@ -23,6 +27,14 @@ new_work/
 - 主简历：`resumes/Introduction.md`
 - 高级前端工程师定制版：`resumes/senior-frontend-engineer.md`
 - 网页预览入口：`index.html`
+
+## Wiki
+
+- 大疆高级前端开发面试备考笔记：`wiki/dj.md`
+
+## Demo
+
+- 司空 Lite 三维态势可视化 Demo：`demo/flighthub-lite/`
 
 ## 使用说明
 

@@ -2,6 +2,7 @@
 const FILE_MAP = {
   intro: "./resumes/Introduction.md",
   sfe:   "./resumes/senior-frontend-engineer.md",
+  wiki_dj:   "./wiki/dj.md",
 };
 const DEFAULT_KEY = "intro";
 
