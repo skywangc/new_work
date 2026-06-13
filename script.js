@@ -1,10 +1,11 @@
 // 枚举：短 key → md 文件路径
 const FILE_MAP = {
   intro: "./resumes/Introduction.md",
+  full: "./resumes/full-stack-engineer.md",
   sfe:   "./resumes/senior-frontend-engineer.md",
   wiki_dj:   "./wiki/dj.md",
 };
-const DEFAULT_KEY = "intro";
+const DEFAULT_KEY = "full";
 
 const fileKey = new URLSearchParams(location.search).get("f") || DEFAULT_KEY;
 const markdownPath = FILE_MAP[fileKey] || FILE_MAP[DEFAULT_KEY];
