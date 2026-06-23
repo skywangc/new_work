@@ -2,7 +2,11 @@
 
 ## Project Structure & Module Organization
 
-This is a static resume and interview-prep workspace. The root viewer uses `index.html`, `script.js`, and `styles.css` to render Markdown via `fetch()`. Resume variants live in `resumes/`, source material in `profile/`, interview notes in `wiki/`, and assets in `assets/`. `demo/flighthub-lite/` is a standalone Three.js prototype. Guidance under `.agents/skills/` is skill-specific, not repo-wide policy.
+This is a static resume and interview-prep workspace. The root viewer uses `index.html`, `script.js`, and `styles.css` to render Markdown via `fetch()`. Resume variants live in `resumes/`, source material in `profile/`, interview notes in `wiki/`, company information resources in `resources/`, and assets in `assets/`. `demo/flighthub-lite/` is a standalone Three.js prototype. Guidance under `.agents/skills/` is skill-specific, not repo-wide policy.
+
+`resources/` stores company/job-market information resources for reference and research only. Do not use files in `resources/` as source material when generating or customizing resumes unless the user explicitly asks for it.
+
+`demo/` contains standalone prototype projects built to validate skills for specific job descriptions (JDs). These are interview demonstration projects, not production work. Do not use files in `demo/` as source material when generating or customizing resumes unless the user explicitly asks for it.
 
 ## Build, Test, and Development Commands
 

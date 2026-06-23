@@ -24,7 +24,7 @@ html {
 
 body {
   margin: 0;
-  padding: 24px 12px;
+  padding: 96px 12px 24px;
   background:
     linear-gradient(180deg, hsl(var(--muted)) 0%, hsl(var(--background)) 280px);
 }
@@ -38,10 +38,105 @@ body {
   margin: 0 auto;
 }
 
+.nav-tabs {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  z-index: 50;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: calc(100% - 32px);
+  min-height: 56px;
+  padding: 10px max(12px, calc((100vw - 190mm - 242px) / 2 + 12px)) 12px;
+  border: 1px solid transparent;
+  border-bottom-color: hsl(var(--border));
+  border-radius: 12px;
+  background: transparent;
+  transform: translateX(-50%);
+  transition:
+    top 220ms ease,
+    min-height 220ms ease,
+    padding 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease,
+    backdrop-filter 220ms ease;
+}
+
+body.nav-compact .nav-tabs {
+  top: 8px;
+  min-height: 44px;
+  padding: 6px max(10px, calc((100vw - 190mm - 242px) / 2 + 10px));
+  border-color: rgb(255 255 255 / 0.56);
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 0.58), rgb(255 255 255 / 0.22)),
+    rgb(255 255 255 / 0.34);
+  box-shadow:
+    0 18px 48px rgb(15 23 42 / 0.14),
+    inset 0 1px 0 rgb(255 255 255 / 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.nav-tab {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    padding 220ms ease,
+    transform 160ms ease;
+}
+
+body.nav-compact .nav-tab {
+  padding: 6px 14px;
+}
+
+.nav-tab:hover {
+  color: hsl(var(--primary));
+  background: hsl(var(--muted));
+  text-decoration: none;
+}
+
+.nav-tab.is-active {
+  color: hsl(var(--primary));
+  background: hsl(var(--muted));
+  font-weight: 600;
+}
+
+.nav-tab:active,
+.nav-tab:focus {
+  background: hsl(var(--muted));
+}
+
+@media screen and (max-width: 1040px) {
+  .nav-tabs {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
 .toc {
   position: sticky;
-  top: 24px;
-  max-height: calc(100vh - 48px);
+  top: 88px;
+  max-height: calc(100vh - 112px);
   overflow: auto;
   padding: 16px 14px;
   border: 1px solid rgb(255 255 255 / 0.6);
@@ -55,6 +150,14 @@ body {
     inset 0 -1px 0 rgb(148 163 184 / 0.16);
   backdrop-filter: blur(24px) saturate(190%);
   -webkit-backdrop-filter: blur(24px) saturate(190%);
+  transition:
+    top 220ms ease,
+    max-height 220ms ease;
+}
+
+body.nav-compact .toc {
+  top: 68px;
+  max-height: calc(100vh - 92px);
 }
 
 .toc-toggle {
@@ -275,7 +378,7 @@ li::marker {
 
 @media screen and (max-width: 1040px) {
   body {
-    padding: 16px 12px;
+    padding: 96px 12px 16px;
   }
 
   .document-shell {
@@ -285,7 +388,7 @@ li::marker {
 
   .toc {
     position: fixed;
-    top: 78px;
+    top: 96px;
     left: 12px;
     z-index: 20;
     width: min(280px, calc(100vw - 72px));
@@ -293,9 +396,15 @@ li::marker {
     margin-bottom: 0;
     transform: translateX(calc(-100% - 12px));
     transition:
+      top 220ms ease,
       transform 220ms ease,
       box-shadow 220ms ease;
     overflow: visible;
+  }
+
+  body.nav-compact .toc {
+    top: 76px;
+    max-height: calc(100dvh - 92px);
   }
 
   body.toc-open .toc {
@@ -383,7 +492,30 @@ li::marker {
   }
 
   body {
-    padding: 0;
+    padding: 86px 0 0;
+  }
+
+  .nav-tabs {
+    top: 10px;
+    width: calc(100% - 20px);
+    min-height: 52px;
+    padding: 8px;
+    gap: 6px;
+  }
+
+  body.nav-compact .nav-tabs {
+    top: 6px;
+    min-height: 40px;
+    padding: 5px 7px;
+  }
+
+  .nav-tab {
+    padding: 7px 10px;
+    font-size: 0.84rem;
+  }
+
+  body.nav-compact .nav-tab {
+    padding: 5px 9px;
   }
 
   .document-shell {
@@ -391,7 +523,7 @@ li::marker {
   }
 
   .toc {
-    top: 72px;
+    top: 82px;
     left: 10px;
     width: min(276px, calc(100vw - 66px));
     max-height: calc(100dvh - 92px);
@@ -451,7 +583,8 @@ li::marker {
     width: auto;
   }
 
-  .toc {
+  .toc,
+  .nav-tabs {
     display: none;
   }
 

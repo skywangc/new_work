@@ -1,19 +1,45 @@
-// 枚举：短 key → md 文件路径
+// 枚举：短 key → 菜单名称与 md 文件路径
 const FILE_MAP = {
-  intro: "./resumes/Introduction.md",
-  full: "./resumes/full-stack-engineer.md",
-  sfe:   "./resumes/senior-frontend-engineer.md",
-  wiki_dj:   "./wiki/dj.md",
+  intro: { label: "简介", path: "./resumes/Introduction.md" },
+  full: { label: "AI全栈", path: "./resumes/full-stack-engineer.md" },
+  sfe: { label: "高级前端", path: "./resumes/senior-frontend-engineer.md" },
+  nl: { label: "能量前端", path: "./resumes/nengliang-frontend.md" },
+  wiki_jma: { label: "市场分析", path: "./wiki/job-market-analysis.md" },
+  wiki_dj: { label: "大疆面经", path: "./wiki/dj.md" },
 };
 const DEFAULT_KEY = "full";
 
 const fileKey = new URLSearchParams(location.search).get("f") || DEFAULT_KEY;
-const markdownPath = FILE_MAP[fileKey] || FILE_MAP[DEFAULT_KEY];
+const currentKey = FILE_MAP[fileKey] ? fileKey : DEFAULT_KEY;
+const markdownPath = FILE_MAP[currentKey].path;
+
+const navTabs = document.getElementById("navTabs");
+
+Object.entries(FILE_MAP).forEach(([key, file]) => {
+  const tab = document.createElement("a");
+  tab.href = `?f=${key}`;
+  tab.className = "nav-tab";
+  tab.textContent = file.label;
+
+  if (key === currentKey) {
+    tab.classList.add("is-active");
+    tab.setAttribute("aria-current", "page");
+  }
+
+  navTabs.appendChild(tab);
+});
 
 const target = document.getElementById("resume");
 const toc = document.getElementById("toc");
 const tocList = document.getElementById("tocList");
 const tocToggle = document.getElementById("tocToggle");
+
+function syncNavState() {
+  document.body.classList.toggle("nav-compact", window.scrollY > 8);
+}
+
+syncNavState();
+window.addEventListener("scroll", syncNavState, { passive: true });
 
 function escapeHtml(value) {
   return value
