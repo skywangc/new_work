@@ -6,6 +6,8 @@ const FILE_MAP = {
   nl: { label: "能量前端", path: "./resumes/nengliang-frontend.md" },
   wiki_jma: { label: "市场分析", path: "./wiki/job-market-analysis.md" },
   wiki_dj: { label: "大疆面经", path: "./wiki/dj.md" },
+  p7_qa: { label: "P7 QA", path: "./wiki/p7-expression-qa.md" },
+  self_introduction: { label: "P7 FE", path: "./resumes/self-c.md" }
 };
 const DEFAULT_KEY = "full";
 
